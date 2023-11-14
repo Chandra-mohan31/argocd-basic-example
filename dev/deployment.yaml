@@ -1,19 +1,33 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: myapp
+  name: sample-dep
 spec:
-  selector:
-    matchLabels:
-      app: myapp
-  replicas: 2
   template:
     metadata:
       labels:
-        app: myapp
+        app: sample-node-app
     spec:
       containers:
-      - name: myapp
-        image: nanajanashia/argocd-app:1.2
-        ports:
-        - containerPort: 8080
+        - name: sample-node-app
+          image: 31052007/sample-node-app:build-27
+          ports:
+          - containerPort: 3000
+  replicas: 2
+  selector:
+    matchLabels:
+      app: sample-node-app
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sample-node-service
+  labels:
+    app: sample-node-service
+spec:
+  ports:
+  - targetPort: 3000
+    port: 3000
+  selector: 
+    app: sample-node-app
