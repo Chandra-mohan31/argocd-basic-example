@@ -10,7 +10,7 @@ spec:
     spec:
       containers:
         - name: sample-node-app
-          image: 31052007/sample-node-app:build-27
+          image: 31052007/sample-node-app:build-8
           ports:
           - containerPort: 3000
   replicas: 2
